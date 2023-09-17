@@ -31,15 +31,13 @@
 
 An autoencoder is a type of artificial neural network primarily used for unsupervised learning tasks, such as data compression and noise reduction. Its architecture is tailored to learn efficient codings or representations of input data, often for dimensionality reduction or for learning generative models of data. In this report, I will elucidate my understanding of autoencoders by training one on 3D data uniformly distributed over the surface of a cube. Subsequently, I will introduce a method to control the distribution of the latent (bottleneck) variable and incorporate iid Gaussian noise to this latent variable with an adjustable, non-learned SNR. We will then discuss the characteristics of the reconstructions obtained at various SNRs and dimensionalities of the latent vector. Finally, we will choose a quality measure to quantify the generative performance of the autoencoder.
 
-Intro contents \cite{domingos2012few}
-
 \section{THEORY}
 \label{sec:theory}
 
 \subsection{Variational autoencoder (VAE)}
 \label{ssec:vae}
 
-Variational Autoencoders (VAEs) are a type of generative model that builds upon traditional autoencoders by incorporating probabilistic layers and a distinct regularization term. While standard autoencoders learn deterministic encodings of the input data, VAEs are designed to learn probabilistic mappings. As a result, the latent space of a VAE is structured to follow a specific probability distribution, most commonly a Gaussian distribution.
+Variational Autoencoders (VAEs) \cite{kingma2013auto} are a type of generative model that builds upon traditional autoencoders by incorporating probabilistic layers and a distinct regularization term. While standard autoencoders learn deterministic encodings of the input data, VAEs are designed to learn probabilistic mappings. As a result, the latent space of a VAE is structured to follow a specific probability distribution, most commonly a Gaussian distribution.
 
 \begin{equation}
   \text{ELBO}(\theta, \phi; x) = \text{E}_{q_\phi(z|x)}[\log p_\theta(x|z)] - \text{KL}(q_\phi(z|x) || p(z))
@@ -50,7 +48,7 @@ Variational Autoencoders (VAEs) are a type of generative model that builds upon 
 \label{ssec:snr}
 
 The Signal-to-Noise Ratio, commonly abbreviated as SNR, is a measure used to quantify the level of a desired signal relative to the level of background noise. 
-In the context of digital signals and data processing, the SNR provides insights into the clarity and quality of a signal amidst the presence of noise.
+In the context of digital signals and data processing, the SNR \cite{vincent2008extracting} provides insights into the clarity and quality of a signal amidst the presence of noise.
 
 In autoencoders, the latent or bottleneck variable captures the compressed representation of the input data. By introducing noise, specifically iid (independent and identically distributed) Gaussian noise, to this latent space, one can simulate real-world scenarios where data might be corrupted or perturbed. This process can also act as a form of regularization, potentially improving the generalization capability of the autoencoder.
 
@@ -60,7 +58,7 @@ Gaussian noise, characterized by its bell-shaped probability distribution, is a 
 \subsection{Earth Mover's Distance (EMD)}
 \label{ssec:emd}
 
-The Earth Mover's Distance, commonly referred to as EMD or Wasserstein distance, is a metric that quantifies the dissimilarity between two probability distributions over a given space. Originating from the fields of transportation and economics, EMD has found extensive applications in computer vision, machine learning, and image retrieval due to its sensitivity to the spatial distribution of data points.
+The Earth Mover's Distance, commonly referred to as EMD or Wasserstein distance\cite{tolstikhin2017wasserstein}, is a metric that quantifies the dissimilarity between two probability distributions over a given space. Originating from the fields of transportation and economics, EMD has found extensive applications in computer vision, machine learning, and image retrieval due to its sensitivity to the spatial distribution of data points.
 
 Imagine two distinct piles of soil representing two distributions. The goal is to reshape one pile to match the other. EMD measures the least amount of "work" required to achieve this, where "work" is determined by the product of the soil amount and the distance it's moved.
 
