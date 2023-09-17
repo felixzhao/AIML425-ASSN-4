@@ -101,6 +101,31 @@ The data distribution is showing in Figure $\ref{fig:data}$.
 \subsection{Basic autoencoder}
 \label{ssec:basicautoencoder}
 
+We train autoencoder start with basic approach with encoder and decoder and MSE as object function.
+After tuning the dimension of latent variables by visualize the decoder output. 
+We find the model work perty well when we set 7 latent varialbes.
+But, we also found the distribution of each latent varialbe is not stable, as shows in Figure $\ref{fig:basic}$.
+
+\begin{figure}[htb]
+  \begin{minipage}[b]{1.0\linewidth}
+    \centering
+    \centerline{\includegraphics[width=7.0cm]{images/basic_r1}}
+  %  \vspace{1.5cm}
+    \centerline{(a) round 1}\medskip
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{1.0\linewidth}
+    \centering
+    \centerline{\includegraphics[width=7.0cm]{images/basic_r2}}
+  %  \vspace{1.5cm}
+    \centerline{(b) round 2 }\medskip
+  \end{minipage}
+  %
+  \caption{distribution of latent variables}
+  \label{fig:basic}
+  %
+  \end{figure}
+
 \subsection{Control the distribution of thelatent (bottleneck) variable}
 \label{ssec:VAE}
 
