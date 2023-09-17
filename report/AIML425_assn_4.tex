@@ -60,15 +60,6 @@ Gaussian noise, characterized by its bell-shaped probability distribution, is a 
 
 The Earth Mover's Distance, commonly referred to as EMD or Wasserstein distance\cite{tolstikhin2017wasserstein}, is a metric that quantifies the dissimilarity between two probability distributions over a given space. Originating from the fields of transportation and economics, EMD has found extensive applications in computer vision, machine learning, and image retrieval due to its sensitivity to the spatial distribution of data points.
 
-Imagine two distinct piles of soil representing two distributions. The goal is to reshape one pile to match the other. EMD measures the least amount of "work" required to achieve this, where "work" is determined by the product of the soil amount and the distance it's moved.
-
-For two distributions 
-$P$ and 
-$Q$, EMD is the minimal cumulative cost to transfer mass from points in 
-$P$ to points in 
-$Q$. This transformation can be represented as a linear programming problem, though faster algorithms and approximations have been developed for specific scenarios.
-
-
 \section{RESULTS}
 \label{sec:results}
 
@@ -81,7 +72,7 @@ The data distribution is showing in Figure $\ref{fig:data}$.
 \begin{figure}[htb]
   \begin{minipage}[b]{1.0\linewidth}
     \centering
-    \centerline{\includegraphics[width=7.0cm]{images/data}}
+    \centerline{\includegraphics[width=4.0cm]{images/data}}
   \end{minipage}
   \caption{3D data that are uniformly distributed over the surface of a cube}
   \label{fig:data}
