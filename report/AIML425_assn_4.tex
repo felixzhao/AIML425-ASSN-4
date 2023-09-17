@@ -29,15 +29,7 @@
 \section{Introduction}
 \label{sec:intro}
 
-An autoencoder is a type of artificial neural network used primarily for unsupervised learning tasks, especially data compression and noise reduction. Its architecture is designed to learn efficient codings or representations of input data, typically for the purpose of dimensionality reduction or for learning generative models of data.
-In this work, I will present my understanding of it by train an autoencoder on a 3D data that are uniformly distributed over the surface of a cube data.
-and then, introducing a suitable method to control the distribution of the latent (bottleneck) variable
-as well as add iid Gaussian noise to the latent (bottleneck) variable with an adjustable
-(not learned) SNR.
-after that, we discuss the attributes of the reconstruction that you obtain at various SNRs
-and dimensionalities of the latent vector.
-at last, we select a quality measure, and quantify the generative performance of your autoencoder
-
+An autoencoder is a type of artificial neural network primarily used for unsupervised learning tasks, such as data compression and noise reduction. Its architecture is tailored to learn efficient codings or representations of input data, often for dimensionality reduction or for learning generative models of data. In this report, I will elucidate my understanding of autoencoders by training one on 3D data uniformly distributed over the surface of a cube. Subsequently, I will introduce a method to control the distribution of the latent (bottleneck) variable and incorporate iid Gaussian noise to this latent variable with an adjustable, non-learned SNR. We will then discuss the characteristics of the reconstructions obtained at various SNRs and dimensionalities of the latent vector. Finally, we will choose a quality measure to quantify the generative performance of the autoencoder.
 
 Intro contents \cite{domingos2012few}
 
@@ -47,7 +39,7 @@ Intro contents \cite{domingos2012few}
 \subsection{Variational autoencoder (VAE)}
 \label{ssec:vae}
 
-Variational Autoencoders, commonly known as VAEs, are a type of generative model that extends traditional autoencoders by introducing probabilistic layers and a specific regularization term. Unlike standard autoencoders, which learn deterministic encodings of the input data, VAEs learn probabilistic mappings. This means that the latent space of a VAE is designed to follow a specific probability distribution, typically a Gaussian distribution.
+Variational Autoencoders (VAEs) are a type of generative model that builds upon traditional autoencoders by incorporating probabilistic layers and a distinct regularization term. While standard autoencoders learn deterministic encodings of the input data, VAEs are designed to learn probabilistic mappings. As a result, the latent space of a VAE is structured to follow a specific probability distribution, most commonly a Gaussian distribution.
 
 \begin{equation}
   \text{ELBO}(\theta, \phi; x) = \text{E}_{q_\phi(z|x)}[\log p_\theta(x|z)] - \text{KL}(q_\phi(z|x) || p(z))
@@ -101,11 +93,7 @@ The data distribution is showing in Figure $\ref{fig:data}$.
 \subsection{Basic autoencoder}
 \label{ssec:basicautoencoder}
 
-We train autoencoder start with basic approach with encoder and decoder and MSE as object function.
-After tuning the dimension of latent variables by visualize the decoder output. 
-We find the model work perty well when we set 7 latent varialbes.
-But, we also found the distribution of each latent varialbe is not stable, as shows in Figure $\ref{fig:basic}$.
-
+We began by training the autoencoder using a basic approach, incorporating both an encoder and a decoder with the Mean Squared Error (MSE) as the objective function. After adjusting the dimension of the latent variables and visualizing the decoder output, we found that the model performed optimally with 7 latent variables. However, we also observed that the distribution of each latent variable was unstable, as shown in Figure $\ref{fig:basic}$.
 
 \subsubsection{Interpretation of the MSE objective function which used in autoencoder}
 \label{sssec:mse}
@@ -134,23 +122,17 @@ The MSE objective function in an autoencoder can be seen as a maximum likelihood
 \subsection{Control the distribution of latent variable}
 \label{ssec:VAE}
 
-To resolve the problem we found for basic autoencoder which is latent variables distribution unstable.
-We selected Variational autoencoder (VAE) to control the distribution of the latent (bottleneck) variables,
-and then add iid Gaussian noise to the latent (bottleneck) variable with an adjustable (not learned) SNR
-
-
+To address the instability in the latent variable distribution observed in the basic autoencoder, we opted for the Variational Autoencoder (VAE). This allowed us to better control the distribution of the latent (bottleneck) variables. Subsequently, we introduced iid Gaussian noise to the latent (bottleneck) variable, using an adjustable (non-learned) SNR.
 \subsection{attributes of the reconstruction that you obtain at various SNRs and dimensionalities of the latent vector (select a range of interesting settings)}
 \label{ssec:discuss}
 
-We experimented with different parameter values.
-SNR in range 5, 10, 20, 50, 100.
-latent dimensionalities in range 2, 3, 5, 7, 10.
+We experimented with various parameter values:
 
-Figure $\ref{fig:discuss}$ shows, when latent dimension is low the latent can not represent all information form the input.
-The reconstructed oupt appears banded. 
-when latent dimension is hight, it shows more infomation.
+SNR values of 5, 10, 20, 50, and 100.
+Latent dimensionalities of 2, 3, 5, 7, and 10.
+Figure $\ref{fig:discuss}$ illustrates that when the latent dimension is low, the latent space cannot capture all the information from the input, resulting in a reconstructed output that appears banded. Conversely, with a higher latent dimension, more information is represented.
 
-For SNR, compare with low value, it show more scattered which high value.
+Regarding SNR, a lower value results in a more compact representation, whereas a higher value leads to a more scattered distribution.
 \begin{figure}[htb]
   \centering
   % First row
@@ -199,11 +181,9 @@ For SNR, compare with low value, it show more scattered which high value.
 \subsection{quality measure and quantify performance }
 \label{ssec:measure}
 
-For 3D point clouds (like the surface of a cube), the Chamfer distance or EMD are commonly used.
-In this work, we choice Earth Mover's Distance (EMD) to evaluate the model performance
+For 3D point clouds, such as the surface of a cube, metrics like the Chamfer distance or EMD are commonly employed. In this study, we chose the Earth Mover's Distance (EMD) to evaluate the model's performance.
 
-Base on the EMD score, the final model select latent dimensionalities as 10, and SNR as 50 in the previous given range.
-
+Based on the EMD score, we selected a latent dimensionality of 10 and an SNR of 50 from the previously given range.
 \section{CONCLUSION}
 \label{sec:conclusion}
 
