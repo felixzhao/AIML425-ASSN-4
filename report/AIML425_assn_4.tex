@@ -52,9 +52,6 @@ In the context of digital signals and data processing, the SNR \cite{vincent2008
 
 In autoencoders, the latent or bottleneck variable captures the compressed representation of the input data. By introducing noise, specifically iid (independent and identically distributed) Gaussian noise, to this latent space, one can simulate real-world scenarios where data might be corrupted or perturbed. This process can also act as a form of regularization, potentially improving the generalization capability of the autoencoder.
 
-Why Gaussian Noise? 
-Gaussian noise, characterized by its bell-shaped probability distribution, is a common choice due to its natural occurrence in many real-world scenarios. When noise is added to the latent space of an autoencoder, it's essential that this noise doesn't dominate the original signal. The SNR can help in quantifying the balance between the latent variable's information (signal) and the introduced noise.
-
 \subsection{Earth Mover's Distance (EMD)}
 \label{ssec:emd}
 
