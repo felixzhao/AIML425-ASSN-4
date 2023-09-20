@@ -109,7 +109,7 @@ The MSE objective function in an autoencoder can be seen as a maximum likelihood
 \label{ssec:VAE}
 
 To address the instability in the latent variable distribution observed in the basic autoencoder, we opted for the Variational Autoencoder (VAE). This allowed us to better control the distribution of the latent (bottleneck) variables. Subsequently, we introduced iid Gaussian noise to the latent (bottleneck) variable, using an adjustable (non-learned) SNR.
-\subsection{attributes of the reconstruction that you obtain at various SNRs and dimensionalities of the latent vector (select a range of interesting settings)}
+\subsection{Attributes of the reconstruction that you obtain at various SNRs and dimensionalities of the latent vector (select a range of interesting settings)}
 \label{ssec:discuss}
 
 We experimented with various parameter values:
@@ -164,7 +164,7 @@ Regarding SNR, a lower value results in a more compact representation, whereas a
   \label{fig:discuss}
 \end{figure}
 
-\subsection{quality measure and quantify performance }
+\subsection{Quality measure and quantify performance }
 \label{ssec:measure}
 
 For 3D point clouds, such as the surface of a cube, metrics like the Chamfer distance or EMD are commonly employed. In this study, we chose the Earth Mover's Distance (EMD) to evaluate the model's performance.
