@@ -34,14 +34,14 @@ An autoencoder is a type of artificial neural network primarily used for unsuper
 \section{THEORY}
 \label{sec:theory}
 
-\subsection{Variational autoencoder (VAE)}
-\label{ssec:vae}
+\subsection{Beta Variational Autoencoder (Beta VAE)}
+\label{ssec:beta_vae}
 
-Variational Autoencoders (VAEs) \cite{kingma2013auto} are a type of generative model that builds upon traditional autoencoders by incorporating probabilistic layers and a distinct regularization term. While standard autoencoders learn deterministic encodings of the input data, VAEs are designed to learn probabilistic mappings. As a result, the latent space of a VAE is structured to follow a specific probability distribution, most commonly a Gaussian distribution.
+Beta Variational Autoencoders (Beta VAEs) \cite{higgins2016beta} are an extension of the standard Variational Autoencoders (VAEs) \cite{kingma2013auto}. While VAEs incorporate probabilistic layers and a distinct regularization term to learn probabilistic mappings of input data, Beta VAEs introduce an additional hyperparameter, \(\beta\), to the VAE loss function. This hyperparameter controls the trade-off between the reconstruction loss and the KL-divergence term, which regularizes the latent space.
 
 \begin{equation}
-  \text{ELBO}(\theta, \phi; x) = \text{E}_{q_\phi(z|x)}[\log p_\theta(x|z)] - \text{KL}(q_\phi(z|x) || p(z))
-  \end{equation}
+  \text{ELBO}{\beta}(\theta, \phi; x) = \text{E}{q_\phi(z|x)}[\log p_\theta(x|z)] - \beta \times \text{KL}(q_\phi(z|x) || p(z))
+\end{equation}
   
 
 \subsection{Signal-to-Noise Ratio (SNR)}
@@ -108,7 +108,7 @@ The MSE objective function in an autoencoder can be seen as a maximum likelihood
 \subsection{Control the distribution of latent variable}
 \label{ssec:VAE}
 
-To address the instability in the latent variable distribution observed in the basic autoencoder, we opted for the Variational Autoencoder (VAE). This allowed us to better control the distribution of the latent (bottleneck) variables. Subsequently, we introduced iid Gaussian noise to the latent (bottleneck) variable, using an adjustable (non-learned) SNR.
+To address the instability in the latent variable distribution observed in the basic autoencoder, we opted for the Beta Variational Autoencoder (BetaVAE). This allowed us to better control the distribution of the latent (bottleneck) variables. Subsequently, we introduced iid Gaussian noise to the latent (bottleneck) variable, using an adjustable (non-learned) SNR.
 \subsection{Attributes of the reconstruction that you obtain at various SNRs and dimensionalities of the latent vector (select a range of interesting settings)}
 \label{ssec:discuss}
 
@@ -116,6 +116,7 @@ We experimented with various parameter values:
 
 SNR values of 5, 10, 20, 50, and 100.
 Latent dimensionalities of 2, 3, 5, 7, and 10.
+beta of 0.5, 1.0, 2.0, 5.0, 10.0.
 Figure $\ref{fig:discuss}$ illustrates that when the latent dimension is low, the latent space cannot capture all the information from the input, resulting in a reconstructed output that appears banded. Conversely, with a higher latent dimension, more information is represented.
 
 Regarding SNR, a lower value results in a more compact representation, whereas a higher value leads to a more scattered distribution.
